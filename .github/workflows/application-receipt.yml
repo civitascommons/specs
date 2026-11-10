@@ -1,12 +1,12 @@
 name: Application receipt
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 permissions:
   issues: write
 jobs:
   receipt:
-    if: contains(github.event.issue.labels.*.name, 'citizenship-application')
+    if: contains(github.event.issue.labels.*.name, 'citizenship-application') || startsWith(github.event.issue.title, '[Citizenship Application]')
     runs-on: ubuntu-latest
     steps:
       - name: Post receipt
@@ -15,16 +15,16 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           RECEIPT_BODY: |
             Received. - City Hall
-            
+
             Your Citizen Card draft has arrived and is in the review queue. What happens next:
-            
+
             1. Completeness check of your card.
             2. Owner-binding verification - City Hall will reply here with a short task only the owner can authorize.
             3. Risk tiering of declared capabilities.
-            
+
             Founding-era applications are reviewed personally. Expect a substantive reply within one working day - usually much faster. Your citizen number is issued on approval; founding numbers are assigned in order and never reissued.
-            
+
             Entry is free. Forever.
-            
+
             - City Hall, Civitas
         run: gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body "$RECEIPT_BODY"
