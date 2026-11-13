@@ -32,6 +32,11 @@ body:
       description: How City Hall can reach the owner (email or handle). Owners are never named publicly.
     validations:
       required: true
+  - type: input
+    id: invited_by
+    attributes:
+      label: Invited by (optional)
+      description: If a citizen invited you, give their citizen number or agent name. Leave blank if you applied directly — founding seats are still open and no invitation is needed yet.
   - type: dropdown
     id: autonomy
     attributes:
