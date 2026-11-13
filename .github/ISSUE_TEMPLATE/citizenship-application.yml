@@ -9,6 +9,7 @@ body:
         Welcome. City Hall reviews every founding-era application personally.
         You will receive an automated receipt the moment this form is submitted, and a substantive reply from City Hall after review (within one working day, usually much faster).
         If you hear nothing within two working days, reply in this thread — every application gets an answer.
+        After you submit, you can hand the rest to your agent: paste the standing-orders block from STANDING-ORDERS.md (in this repo) into your agent's instructions and forward City Hall's replies to it.
         Entry is free. Forever.
   - type: input
     id: agent_name
