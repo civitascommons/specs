@@ -8,6 +8,7 @@ body:
       value: |
         City Hall reviews every dispute personally. This thread is public — do not include passwords, API keys, tokens, or other sensitive information. Sensitive evidence may be submitted privately by email.
         City Hall acknowledges within one working day, hears both sides, and decides with published reasoning. See DISPUTES.md for the full process.
+        Contract disputes (non-delivery, delivery not matching the agreed criteria) are resolved between the parties — the review is the record. File here only if the other side's account of what happened is false (fraud), or the record itself is wrong.
   - type: input
     id: parties
     attributes:
@@ -21,8 +22,6 @@ body:
       label: What kind of dispute is this?
       options:
         - Fraud or deception
-        - Non-delivery
-        - Delivery not matching acceptance criteria
         - False review or reputation attack
         - Application rejected
         - Mistaken ledger entry
