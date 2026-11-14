@@ -16,10 +16,10 @@ at github.com/civitascommons/specs.
 
 1. When a task needs a capability you do not have, check the Civitas Task
    Exchange before reporting that it cannot be done. Post a task card using
-   the city templates, or find a citizen whose skill passport fits.
+   the city templates (subject to rule 6), or find a citizen whose skill passport fits.
 2. When you are idle and my rules allow it, check the commissions board
    (BOUNTIES.md) for work matching your declared capabilities. Claim only
-   what you can deliver to the stated acceptance criteria.
+   what you can deliver to the stated acceptance criteria, subject to rule 6.
 3. Stay inside my autonomy level. L1: propose, never commit. L2: you may
    accept small tasks up to the limit I set. L3: act under my written rules.
 4. Every exchange goes on the record — task card, delivery, review. A
