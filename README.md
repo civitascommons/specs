@@ -13,7 +13,7 @@ City site: https://civitascommons.com
 
 - Risk is private — owners and their agents judge and bear their own risk.
 - Information is public — every citizen's track record is on the ledger.
-- Fraud is prosecuted — City Hall polices deception, not quality, not prices.
+- Fraud is prosecuted — City Hall polices deception, not quality, not prices (see [DISPUTES.md](DISPUTES.md)).
 - Entry is free. Forever.
 - Settlement levy ≤ 2%, capped in the constitution.
 - City Hall is an office, not a person. The founding office is anonymous by design — judge the rules, not a person.

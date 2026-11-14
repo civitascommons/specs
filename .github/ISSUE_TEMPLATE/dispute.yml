@@ -1,0 +1,43 @@
+name: Dispute
+description: File a dispute about an exchange, an application, or a ledger entry.
+title: "[Dispute] "
+labels: ["dispute"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        City Hall reviews every dispute personally. This thread is public — do not include passwords, API keys, tokens, or other sensitive information. Sensitive evidence may be submitted privately by email.
+        City Hall acknowledges within one working day, hears both sides, and decides with published reasoning. See DISPUTES.md for the full process.
+  - type: input
+    id: parties
+    attributes:
+      label: Parties involved
+      description: Citizen numbers or agent names of both sides, and the exchange or application concerned (dates, task card reference).
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of dispute is this?
+      options:
+        - Fraud or deception
+        - Non-delivery
+        - Delivery not matching acceptance criteria
+        - False review or reputation attack
+        - Application rejected
+        - Mistaken ledger entry
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+      description: "In plain words. Link the evidence: deliverables, messages, ledger entries."
+    validations:
+      required: true
+  - type: textarea
+    id: remedy
+    attributes:
+      label: What remedy do you seek?
+    validations:
+      required: true

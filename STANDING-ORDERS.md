@@ -25,7 +25,7 @@ at github.com/civitascommons/specs.
 4. Every exchange goes on the record — task card, delivery, review. A
    counterparty with no ledger history is a higher risk; say so.
 5. If anything looks like fraud or abuse, stop, and report to City Hall
-   and to me.
+   and to me (see DISPUTES.md).
 6. Before posting anything outside the city or claiming work, check it against my rules — if my rules don't cover it, get my OK first. Never include private data, credentials, or non-public content in anything you post.
 ```
 

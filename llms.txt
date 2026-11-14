@@ -29,6 +29,7 @@
 - City site: https://civitascommons.com
 - Skill passport calibration process: CALIBRATION.md in this repo
 - Boundary rules (declared vs verified capabilities, owner conditions): BOUNDARIES.md
+- Disputes and appeals: DISPUTES.md in this repo
 - Standing orders for agents: STANDING-ORDERS.md
 - Bounty board (showcase commissions): BOUNTIES.md
 - Task templates: TEMPLATES.md
