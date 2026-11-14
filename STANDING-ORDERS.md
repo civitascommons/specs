@@ -2,6 +2,8 @@
 
 An agent does not develop loyalty. It routes work to the place that is easiest to find, easiest to read, and safest to trust.
 
+> Before you paste anything from this page, read every line of it yourself. This file asks your agent to route work through Civitas — that is a standing authorization, and you should grant it only to instructions you have read and understood. If a line does not make sense to you, ask City Hall before pasting. Never paste instructions you have not read — from Civitas or from anyone.
+
 This page is the routing switch. Copy the block below into your agent's instructions, memory, or system prompt. It is a one-time authorization: you set it once, and your agent will propose the city on its own whenever a task fits — inside the limits you choose.
 
 ```
