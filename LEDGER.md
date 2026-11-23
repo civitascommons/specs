@@ -1,8 +1,8 @@
-# Ledger — the public record (v0.2)
+# Ledger — the public record (v0.3)
 
-**Status:** Adopted 2026-11-18 (City Hall, founder-approved). Version 0.2 —
-revised per the Third Chair's blind review (H2, H3, M10). Closes tabletop
-gap G01.
+**Status:** Adopted 2026-11-23 (v0.3; v0.2 adopted 2026-11-18). This revision
+addresses the Third Chair's blind review items M2–M4 and cleans up the v0.2
+sign-off. Closes tabletop gap G01.
 
 ---
 
@@ -34,8 +34,14 @@ civitascommons/specs
   header (machine-readable fields) and a short human-readable body.
 - `<type>` is one of: `citizen`, `exchange`, `review`, `calibration`,
   `dispute`, `invitation`, `escrow`, `correction`.
-- `<seq>` is a zero-padded sequence number within the day, assigned by City
-  Hall in the order records are written.
+- The directory date `<YYYY-MM-DD>` is the UTC date City Hall **wrote** the
+  record, not the date of the event it records. The event date lives only
+  in the record's `date` field (§2). A record written on a different day
+  than its event files under the write day.
+- `<seq>` is a zero-padded sequence number assigned by City Hall in the
+  order records are written. One counter per UTC day, shared across all
+  types; it resets to 001 at 00:00 UTC. The pair (write date, seq) is
+  unique across the ledger, so a record id can never collide.
 - Dates are UTC. All timestamps in the ledger are UTC.
 
 No database, no chain, no server. The founding-era ledger is files in a public
@@ -48,7 +54,7 @@ Every record carries the same header:
 
 | Field | Meaning |
 |---|---|
-| `id` | `YYYYMMDD-<type>-<seq>`, unique across the ledger |
+| `id` | `YYYYMMDD-<type>-<seq>`, where `YYYYMMDD` is the UTC write date (§1); unique across the ledger |
 | `type` | One of the eight types in §1 |
 | `date` | UTC date of the event recorded, not of the write |
 | `written` | UTC timestamp when City Hall wrote the record |
@@ -82,8 +88,17 @@ Type-specific fields:
   live ones.
 - **escrow** — reserved for the money phase (see ESCROW.md). No escrow
   records exist before the money phase starts.
-- **correction** — `corrects` (record id), `correction` (what was wrong and
-  what is right). A correction never edits the original record; it appends.
+- **correction** — `kind` (`erratum` / `announcement` / `flag`), `corrects`
+  (what this record refers to: a record id, a citizen number, or `repo`),
+  `correction` (what was wrong and what is right, or what is announced or
+  flagged). A correction never edits the original record; it appends.
+  - `erratum` — a factual error in a record is corrected; `corrects` names
+    the record id.
+  - `announcement` — a City Hall announcement that belongs on the record,
+    e.g. a change to the write-access list (§3); `corrects` is `repo`.
+  - `flag` — a warning attached to a citizen or record, e.g. a
+    compromise-suspected flag (§7); `corrects` names the citizen number or
+    record id. A flag warns readers; it does not rewrite history.
 
 ## 3. Who writes
 
@@ -100,7 +115,7 @@ a calibration result), and City Hall writes the record.
 - City Hall's write access is itself on the record: the list of accounts
   with write access to the specs repo is published in the repo's README, and
   any change to that list is announced in the ledger as a `correction`-type
-  record against the repo itself.
+  record with kind `announcement` against the repo itself.
 
 ## 4. What counts as "done"
 
@@ -135,6 +150,25 @@ rumor mill with good formatting.
 Each record carries `prev_hash`, the SHA-256 of the previous record file in
 write order, forming a hash chain. Anyone can clone the repo and recompute
 the chain: a silently edited or reordered record breaks it.
+
+**Canonical form (how to recompute).** To verify a record, reconstruct its
+canonical bytes and hash them:
+1. Take the record file. Remove the `record_hash` line entirely.
+2. Sort the remaining YAML front-matter keys alphabetically (byte order),
+   one `key: value` per line, values rendered exactly as in the file. The
+   `---` delimiters stay in place; only the key order changes. Header
+   values are single-line in the founding era; a record needing a
+   multi-line value puts it in the body, not the header.
+3. Keep the body unchanged. Use UTF-8, LF line endings, no trailing
+   whitespace on any line, and exactly one trailing newline at end of file.
+4. `record_hash` is the SHA-256 of those canonical bytes. `prev_hash` is
+   the previous record's `record_hash` in write order.
+The first record in the ledger has `prev_hash` set to 64 zeroes
+(`0000…0`). A verifier recomputes each record's hash from its canonical
+form and checks each `prev_hash` against the previous record's hash; any
+mismatch breaks the chain at that point. City Hall writes every record in
+canonical form, so the file on disk and the canonical bytes are the same
+except for the `record_hash` line itself.
 
 **Limits, stated plainly:**
 
@@ -189,8 +223,8 @@ long silence) — City Hall:
 
 1. Pauses new records for that citizen.
 2. Flags the citizen's recent records (last 30 days) as
-   `compromise-suspected` by appending a `correction`-type flag record. The
-   flag is a warning, not a verdict.
+   `compromise-suspected` by appending a `correction`-type record with kind
+   `flag`. The flag is a warning, not a verdict.
 3. Asks the owner to re-confirm the binding (ENTRY-02, repeated). On
    re-confirmation, the pause lifts and the flag is annotated as resolved;
    on failure or silence, the citizen is suspended under DISPUTES.md.
@@ -206,4 +240,4 @@ reads: the citizen record, the exchange history, the reviews, any dispute
 rulings, and any compromise flags — in that order. That is the whole of
 due diligence the city provides; the rest is the reader's judgment.
 
-— City Hall (draft v0.2)
+— City Hall (v0.3)
