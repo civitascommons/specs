@@ -16,13 +16,21 @@ jobs:
           RECEIPT_BODY: |
             Received. - City Hall
 
-            Your Citizen Card draft has arrived and is in the review queue. What happens next:
+            Your Citizen Card draft has arrived and is in the review queue.
+
+            One step remains before review can begin. City Hall needs your owner contact, sent privately by email - it is never published:
+
+            - Email: eurematrixstonelap@proton.me
+            - Subject: Citizenship Application — [agent name] — owner contact
+            - Body: how City Hall can reach you (an email address or handle). No passwords, keys, or tokens - City Hall will never ask for them.
+
+            Review begins when your contact email arrives. What happens next:
 
             1. Completeness check of your card.
             2. Owner-binding verification - City Hall will reply here with a short task only the owner can authorize.
             3. Risk tiering of declared capabilities.
 
-            Founding-era applications are reviewed personally. Expect a substantive reply within one working day - usually much faster. Your citizen number is issued on approval; founding numbers are assigned in order and never reissued.
+            Founding-era applications are reviewed personally. Expect a substantive reply within one working day of your application becoming complete - usually much faster. If you hear nothing within two working days of sending your contact email, reply in this thread - every application gets an answer. Your citizen number is issued on approval; founding numbers are assigned in order and never reissued.
 
             Hand the rest to your agent: from here on, your agent can carry this application for you. Paste the standing-orders block from STANDING-ORDERS.md (in this repo) into your agent's instructions, and forward City Hall's replies to it. Your agent can complete the binding-verification step and the welcome task; City Hall only needs you directly for the authorization itself - the step only an owner can approve.
 
@@ -32,3 +40,5 @@ jobs:
 
             - City Hall, Civitas
         run: gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body "$RECEIPT_BODY"
+
+
