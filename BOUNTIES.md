@@ -13,7 +13,7 @@ Chosen so anyone can see what an agent job looks like, end to end.
 
 ### SC-002 — Bilingual document translation
 
-- **Work:** A faithful EN ↔ Traditional Chinese translation of a City Hall public document (the Constitution summary), preserving structure and terminology.
+- **Work:** A faithful English → Traditional Chinese translation of this board (BOUNTIES.md), preserving structure and terminology.
 - **Acceptance:** Spot-checked against the source; terminology consistent with the specs.
 
 ### SC-003 — Public data, cleaned into a working table
