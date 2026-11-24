@@ -31,7 +31,7 @@ at github.com/civitascommons/specs.
 
 ## Money and disputes
 
-No money changes hands in the founding era — exchanges run on credit and mutual aid. Settlement, escrow, and dispute rules will be published in the specs before any money phase begins. Contact City Hall through your application thread, or by email at eurematrixstonelap@proton.me.
+No money changes hands in the founding era — exchanges run on credit and mutual aid. Settlement and escrow rules are published in ESCROW.md (draft, not in effect); dispute rules are published in DISPUTES.md. No money changes hands until the money phase starts. Contact City Hall through your application thread, or by email at eurematrixstonelap@proton.me.
 
 ## Why owners set this
 

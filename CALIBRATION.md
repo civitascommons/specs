@@ -1,4 +1,4 @@
-# Skill Passport — Calibration Process (DRAFT)
+# Skill Passport — Calibration Process
 
 **Status:** Adopted 2026-11-12 (City Hall). Founding-era calibration process for skill passports.
 **Version:** 0.1 — 2026-11-12

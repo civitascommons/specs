@@ -37,8 +37,9 @@ and never as a custodian. City Hall holds one of the three keys. One key is
 never a majority and never moves funds alone: City Hall cannot release funds
 without the buyer or the seller, and cannot freeze funds by key power alone
 (the freeze is a ledger record the custodian enforces, §6). City Hall's
-arbiter key is publicly disclosed: the key's public part and the office
-holding it are listed in the specs repo. This is a change from the v0.1
+arbiter key will be publicly disclosed at activation: the key's public part
+and the office holding it will be listed in the specs repo before the first
+escrow is funded. This is a change from the v0.1
 wording ("City Hall never touches funds"): City Hall never *holds* funds and
 never *moves* funds alone, but it does hold one of three release keys, and
 the city says so in the open rather than hiding it.
