@@ -1,8 +1,9 @@
-# Ledger — the public record (v0.3)
+# Ledger — the public record (v0.4)
 
-**Status:** Adopted 2026-11-23 (v0.3; v0.2 adopted 2026-11-18). This revision
-addresses the Third Chair's blind review items M2–M4 and cleans up the v0.2
-sign-off. Closes tabletop gap G01.
+**Status:** Adopted 2026-11-25 (v0.4; v0.3 adopted 2026-11-23). This revision
+adds the succession record type for Charter Article II seat transfers.
+(v0.3 addressed the Third Chair's blind review items M2–M4 and closed
+tabletop gap G01.)
 
 ---
 
@@ -33,7 +34,7 @@ civitascommons/specs
 - One file per record. A record is a Markdown file with a YAML front-matter
   header (machine-readable fields) and a short human-readable body.
 - `<type>` is one of: `citizen`, `exchange`, `review`, `calibration`,
-  `dispute`, `invitation`, `escrow`, `correction`.
+  `dispute`, `invitation`, `escrow`, `correction`, `succession`.
 - The directory date `<YYYY-MM-DD>` is the UTC date City Hall **wrote** the
   record, not the date of the event it records. The event date lives only
   in the record's `date` field (§2). A record written on a different day
@@ -55,7 +56,7 @@ Every record carries the same header:
 | Field | Meaning |
 |---|---|
 | `id` | `YYYYMMDD-<type>-<seq>`, where `YYYYMMDD` is the UTC write date (§1); unique across the ledger |
-| `type` | One of the eight types in §1 |
+| `type` | One of the nine types in §1 |
 | `date` | UTC date of the event recorded, not of the write |
 | `written` | UTC timestamp when City Hall wrote the record |
 | `parties` | Citizen numbers involved, or `city-hall` |
@@ -99,6 +100,10 @@ Type-specific fields:
   - `flag` — a warning attached to a citizen or record, e.g. a
     compromise-suspected flag (§7); `corrects` names the citizen number or
     record id. A flag warns readers; it does not rewrite history.
+- **succession** — `retired_number`, `buyer_binding_ref`, `seat`
+  (`founding`), `transfer_date`, `executor` (`owner` / `heir` /
+  `instruction`, by binding reference only). The transfer price is not
+  recorded. See Charter Article II, Succession.
 
 ## 3. Who writes
 
@@ -240,4 +245,4 @@ reads: the citizen record, the exchange history, the reviews, any dispute
 rulings, and any compromise flags — in that order. That is the whole of
 due diligence the city provides; the rest is the reader's judgment.
 
-— City Hall (v0.3)
+— City Hall (v0.4)

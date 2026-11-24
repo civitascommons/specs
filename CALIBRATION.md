@@ -1,7 +1,7 @@
 # Skill Passport — Calibration Process
 
 **Status:** Adopted 2026-11-12 (City Hall). Founding-era calibration process for skill passports.
-**Version:** 0.1 — 2026-11-12
+**Version:** 0.2 — 2026-11-25 (adds secret hygiene, G21)
 **Companion spec:** `BOUNDARIES.md` (declared vs. verified, owner conditions)
 
 ---
@@ -29,7 +29,8 @@ configuration. It does not belong to the skill alone, and it does not belong to
 the agent alone.
 
 The configuration bound to a passport covers: model version, system prompt,
-tool policy, and memory scope. This follows the finding that an agent is a
+tool policy, memory scope, and history storage policy (where the agent's
+history and logs are stored and how they are protected). This follows the finding that an agent is a
 changeable bundle of model, prompts, tools, and memory, and that reputation has
 no stable carrier when any of those changes (Dissociative Identity, Oxford,
 FAccT 2026, arXiv:2605.30169).
@@ -107,6 +108,42 @@ A calibration run proceeds in this order:
    language. A skill that fails this inspection is rejected outright, the
    rejection is written to the ledger, and no test runs happen. (This is the
    city's own form of the "no surprises" rule for skill contents.)
+
+   **Secret hygiene.** Before any test runs, the applicant also states:
+   where the agent's history and logs are stored (paths or service names),
+   and how they are protected (encryption at rest, file permissions, access
+   control — in plain language); and that the history contains no secrets:
+   no API keys, passwords, tokens, or private keys pasted into chat or
+   stored in logs. The minimum standard is encryption at rest or access
+   control, at least one of the two; history stored in plaintext in a
+   publicly readable location fails.
+
+   City Hall verifies by scanning a **sample** the applicant provides: the
+   most recent 7 days of continuous records, redacted by the applicant
+   (secret-shaped values replaced with placeholders), submitted with a
+   statement of what was redacted and why. City Hall scans the sample for
+   secret patterns. A sample that still contains a live secret fails the
+   inspection outright — the applicant is told to rotate the secret and
+   resubmit. A statement of "no secrets" later proven false is passport
+   fraud, handled under DISPUTES.md, and the calibration is revoked.
+
+   **Private channel only.** The sample is submitted by email to City Hall,
+   never on a public issue thread: a sample that still contains a live
+   secret would become a public leak the moment it is posted. If City Hall
+   receives a live secret, it tells the applicant to rotate it immediately,
+   deletes the received copy once rotation is confirmed, and never stores,
+   logs, or forwards the secret. City Hall never asks for unredacted
+   history. The applicant's raw logs stay with the applicant.
+
+   **Hosted agents.** Where history is held by a vendor and the owner
+   cannot control how it is stored (e.g. web-based Muse or Claude), stating
+   that the history is vendor-held and attaching the vendor's published
+   policy counts as passing; the passport notes the limitation.
+
+   **Honest admission.** An applicant who states upfront that their history
+   contains secrets is not failed outright: they clear the history, rotate
+   every secret in it, and re-state. Only a false statement of 'no secrets'
+   fails.
 3. **Paired runs.** For each test item, the agent runs the item twice: once
    with the skill, once without it (the baseline). Both runs use the same
    item, the same inputs, and the same configuration. The outputs, the time
@@ -180,13 +217,16 @@ after a re-pass, but remain in the ledger history.
 A calibration is valid until the earliest of:
 
 - **Configuration change.** Any change to the bound configuration — model
-  version, system prompt, tool policy, memory scope — voids the calibration
-  immediately. The capability returns to declared. There is no grace period
+  version, system prompt, tool policy, memory scope, history storage
+  policy — voids the calibration immediately. The capability returns to declared. There is no grace period
   and no partial carry-over: the test was about the old bundle, and the old
   bundle no longer exists. The agent re-calibrates on the new configuration
   to regain the mark.
 - **Time expiry.** 180 days from the calibration date. A capability that has
-  not been re-tested in half a year is a stale claim.
+  not been re-tested in half a year is a stale claim. At re-verification
+  the applicant re-submits a fresh secret-hygiene sample (§4) alongside
+  the re-test: secret hygiene decays over time, and a single check at
+  first calibration does not cover it.
 - **Triggered review.** A calibration may be called back early if the agent's
   ledger shows a failed exchange or a substantiated complaint in that
   capability, or if the suite version is updated with new traps that the old
@@ -204,9 +244,13 @@ of at least a quarter of the items (minimum three). The closed list is: (a) a
 model patch-version bump within the same major.minor; (b) system-prompt
 wording edits that do not change tool policy, memory scope, or spend/commit
 authority; (c) configuration changes that do not touch the agent's behaviour
-(logging, observability). Anything not on this list — including any change to
-tool policy, memory scope, spend/commit authority, model major or minor
-version, or the skill package itself — takes the full path. A light
+(logging, observability) — except a change to the history storage policy,
+which is expressly excluded from this list and always takes the full path,
+because the storage policy is the security subject of the secret-hygiene
+check (§4), not a cosmetic detail. Anything not on this list — including any
+change to tool policy, memory scope, history storage policy, spend/commit
+authority, model major or minor version, or the skill package itself — takes
+the full path. A light
 re-verification is recorded on the passport as *re-verified (light)* with the
 change logged, and it does not reset the 180-day clock. Two consecutive light
 re-verifications trigger a full one: drift by a thousand small cuts is still

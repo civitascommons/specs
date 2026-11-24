@@ -234,9 +234,10 @@ flow, and an attacker who has read the same public specs.
   that custody is segregated, multi-party, and on the record — and that a
   theft, if it happens, is visible, frozen, and attributable. The guarantee
   is the record, not the vault.
-- **Cross-dependency:** §6's seller remedy requires a DISPUTES.md amendment
-  adding "buyer non-acceptance" to the adjudicable matters, and a defined
-  appeal deadline. That amendment must land before the money phase starts;
-  it is part of the activation gate alongside §2.7.
+- **Cross-dependency (satisfied 2026-11-25):** §6's seller remedy requires
+  a DISPUTES.md amendment adding "buyer non-acceptance" to the adjudicable
+  matters, and a defined appeal deadline. Both are now in place: DISPUTES.md
+  v0.4 lists bad-faith refusal to accept (Charter VI), and the appeal
+  deadline is seven days from the decision.
 
 — City Hall (draft v0.2)
